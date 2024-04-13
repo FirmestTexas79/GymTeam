@@ -29,11 +29,24 @@ public class ClubController {
         return "clubs-list";
     }
 
+    @GetMapping("/clubs/{clubId}")
+    public String clubDetail(@PathVariable("clubId") long clubId, Model model){
+        ClubDto clubDto = clubService.findClubById(clubId);
+        model.addAttribute("club", clubDto);
+        return "clubs-detail";
+    }
+
     @GetMapping("/clubs/new")
     public String createClubForm(Model model){
         Club club = new Club();
         model.addAttribute("club", club);
         return "clubs-create";
+    }
+
+    @GetMapping("/clubs/{clubId}/delete")
+    public String deleteClub(@PathVariable("clubId") Long clubId){
+        clubService.delete(clubId);
+        return "redirect:/clubs";
     }
 
     @PostMapping("/clubs/new")
