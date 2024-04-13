@@ -1,6 +1,7 @@
 package com.gymos.web.controller;
 
 import com.gymos.web.dto.ClubDto;
+import com.gymos.web.models.Club;
 import com.gymos.web.service.ClubService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,5 +22,12 @@ public class ClubController {
         List<ClubDto> clubs = clubService.findAllClubs();
         model.addAttribute("clubs", clubs);
         return "clubs-list";
+    }
+
+    @GetMapping("/clubs/new")
+    public String createClubForm(Model model){
+        Club club = new Club();
+        model.addAttribute("club", club);
+        return "clubs-create";
     }
 }
