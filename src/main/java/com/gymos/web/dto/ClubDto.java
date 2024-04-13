@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -23,5 +24,6 @@ public class ClubDto {
     private String content;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private List<EventDto> events;
 
 }
