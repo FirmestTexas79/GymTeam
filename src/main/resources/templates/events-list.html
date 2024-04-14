@@ -15,10 +15,10 @@
                 <h1 class="fw-bolder">Najít akce</h1>
                 <p class="lead fw-normal text-muted mb-0">Najít akce v tvé blízkosti</p>
             </div>
-            <div class="row gx-5">
+            <div class="row gx-5 shadow">
                 <div th:each="event :${events}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">
-                        <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..." />
+                        <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" width="400" height="200" alt="..." />
                         <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
                     </div>
                     <a th:href="@{/events/{eventId}(eventId=${event.id})}" class="btn btn-primary">Zobrazit</a>
