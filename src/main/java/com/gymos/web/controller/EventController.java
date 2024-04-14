@@ -3,7 +3,10 @@ package com.gymos.web.controller;
 import com.gymos.web.dto.ClubDto;
 import com.gymos.web.dto.EventDto;
 import com.gymos.web.models.Event;
+import com.gymos.web.models.UserEntity;
+import com.gymos.web.security.SecurityUtil;
 import com.gymos.web.service.EventService;
+import com.gymos.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,11 @@ import java.util.List;
 public class EventController {
 
     private EventService eventService;
+    private UserService userService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @GetMapping("/events")
