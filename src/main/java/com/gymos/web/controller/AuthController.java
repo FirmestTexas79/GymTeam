@@ -1,10 +1,15 @@
 package com.gymos.web.controller;
 
 import com.gymos.web.dto.RegistrationDto;
+import com.gymos.web.models.UserEntity;
 import com.gymos.web.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
@@ -19,5 +24,24 @@ public class AuthController {
         RegistrationDto user = new RegistrationDto();
         model.addAttribute("user", user);
         return "register";
+    }
+
+    @PostMapping("/register/save")
+    public String register(@Valid @ModelAttribute("user") RegistrationDto user,
+                           BindingResult result, Model model){
+        UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
+        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
+            result.rejectValue("email", "Nenene");
+        }
+        UserEntity existingUserUsername = userService.findByUsename(user.getUsername());
+        if(existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
+            result.rejectValue("email", "Nenene");
+        }
+        if(result.hasErrors()){
+            model.addAttribute("user", user);
+            return "register";
+        }
+        userService.saveUser(user);
+        return "redirect:/clubs?success";
     }
 }
