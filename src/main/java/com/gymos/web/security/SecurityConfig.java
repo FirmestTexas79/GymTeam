@@ -30,27 +30,26 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable() // vypnutí CSRF ochrany
-                )
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/register", "/clubs", "/css/**", "/js/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http.csrf().disable()
+                .authorizeRequests()
+                .requestMatchers("/login", "/register", "/clubs", "/css/", "/js/")
+                .permitAll()
+                .and()
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/clubs")
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                ).logout(
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 );
+
         return http.build();
-    }*/
+    }
 
     public void configure(AuthenticationManagerBuilder builder) throws Exception{
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
