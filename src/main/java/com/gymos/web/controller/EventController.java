@@ -35,7 +35,7 @@ public class EventController {
         List<EventDto> events = eventService.findAllEvents();
         String username = SecurityUtil.getSessionUser();
         if(username != null){
-            user = userService.findByUsename(username);
+            user = userService.findByUsername(username);
             model.addAttribute("user", user);
         }
         model.addAttribute("user", user);
@@ -49,7 +49,7 @@ public class EventController {
         EventDto eventDto = eventService.findByEventId(eventId);
         String username = SecurityUtil.getSessionUser();
         if(username != null){
-            user = userService.findByUsename(username);
+            user = userService.findByUsername(username);
             model.addAttribute("user", user);
         }
         model.addAttribute("club", eventDto);

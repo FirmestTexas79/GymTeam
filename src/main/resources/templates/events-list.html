@@ -1,30 +1,30 @@
-<html
-        xmlns:th="https://thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}">
+<html xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <title>Event List</title>
+    <title>Seznam událostí</title>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-    <!-- Page Content-->
+    <!-- Obsah stránky -->
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">Najít akce</h1>
                 <p class="lead fw-normal text-muted mb-0">Najít akce v tvé blízkosti</p>
             </div>
-            <div class="row gx-5 shadow">
-                <div th:each="event :${events}" class="col-lg-6 mb-2">
+            <div class="row gx-5 shadow align-items-center">
+                <div th:each="event : ${events}" class="col-lg-6 mb-2 d-flex flex-column align-items-center">
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" width="400" height="200" alt="..." />
-                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
+                        <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark d-block text-center stretched-link" href="#!"></a>
                     </div>
-                    <a th:href="@{/events/{eventId}(eventId=${event.id})}" class="btn btn-primary">Zobrazit</a>
-                    <div th:if="${user.id} == ${event.club.createdBy.id}">
-                    <a th:href="@{/events/{eventId}/edit(eventId=${event.id})}" class="btn btn-primary">Upravit</a>
-                    </div>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <a th:href="@{/events/{eventId}(eventId=${event.id})}" class="btn btn-primary me-2">Zobrazit</a>
+                        <div th:if="${user.id} == ${event.club.createdBy.id}">
+                            <a th:href="@{/events/{eventId}/edit(eventId=${event.id})}" class="btn btn-primary">Upravit</a>
+                        </div>
                     </div>
                 </div>
             </div>

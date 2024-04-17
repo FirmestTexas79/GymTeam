@@ -23,6 +23,7 @@ public class Event {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String type;
+    private String content;
     private String photoUrl;
     @CreationTimestamp
     private LocalDateTime createdOn;

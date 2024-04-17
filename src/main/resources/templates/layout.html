@@ -11,13 +11,17 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-5">
-        <a class="navbar-brand" th:href="@{/index}"><img th:src="@{assets/logo.png}" width="100" height="100">GymTeam</a>
+        <a class="navbar-brand" th:href="@{/index}">
+            <img th:src="@{assets/logo.png}" height="80" width="auto">
+            <span style="margin-left: 30px;">GymTeam</span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" th:href="@{/index}" >Home</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/clubs}">Najít Klub</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/events}">Najít Událost</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Přihlásit</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}">Registrovat</a></li>
 
@@ -37,16 +41,11 @@
 layout:fragment="body">
 </body>
 
-<section class="py-5 bg-light">
-    <div class="container px-5 my-5">
-        <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
-        <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
-    </div>
-</section>
+
 <footer class="bg-dark py-4 mt-auto">
     <div class="container px-5">
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2023</div></div>
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Semestrální projekt Maťašovský Samuel matassa1</div></div>
             <div class="col-auto">
                 <a class="link-light small" href="#!">Privacy</a>
                 <span class="text-white mx-1">&middot;</span>
