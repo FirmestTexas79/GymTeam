@@ -1,5 +1,6 @@
 package com.gymos.web.dto;
 
+import com.gymos.web.models.UserEntity;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,6 +23,9 @@ public class ClubDto {
     private String photoUrl;
     @NotEmpty(message = "Popis klubu nesmí být prázdný")
     private String content;
+
+    private UserEntity createdBy;
+
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private List<EventDto> events;

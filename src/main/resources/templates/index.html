@@ -1,0 +1,39 @@
+<html xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Club Vytvořit</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .bg-image-full {
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+<!-- Page Content-->
+<section layout:fragment="body">
+    <header class="py-5 bg-image-full" style="background-image: url('https://static.vecteezy.com/system/resources/previews/022/653/711/non_2x/treadmill-in-modern-gym-toned-image-3d-rendering-generative-ai-free-photo.jpg')">
+        <div class="text-center my-5">
+            <img class="img-fluid mb-4" th:src="@{assets/logis.png}" height="auto" width="700px" alt="..." />
+        </div>
+    </header>
+    <!-- Page content-->
+    <!-- Content section-->
+    <div class="container my-5">
+        <div class="container">
+            <div class="col-lg-6">
+                <h2>Správa skupin do posilovny</h2>
+                <p class="lead">Registrovaný uživatel může vytvářet kluby (jméno, foto, popis), které jsou spjaté s jeho id.</p>
+                <p class="mb-0">Dále pro daný klub může vytvořit akci, která se plánuje na specifický čas, ta akce je spjatá s klubem, pod kterým je vytvořena.</p>
+                <p class="mb-0">Hesla se neukládají do normálního stringu, ale jsou zašifrovaná a pak až uložena do tabulky.</p>
+                <p class="mb-0">Admin si může zobrazit list uživatelů a smazat je po potvrzení.</p>
+                <p class="mb-0">Funguje jak registrace, tak login.</p>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

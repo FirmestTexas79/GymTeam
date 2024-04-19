@@ -2,7 +2,11 @@ package com.gymos.web.controller;
 
 import com.gymos.web.dto.ClubDto;
 import com.gymos.web.models.Club;
+import com.gymos.web.models.UserEntity;
+import com.gymos.web.security.SecurityUtil;
 import com.gymos.web.service.ClubService;
+import com.gymos.web.service.UserService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,28 +14,49 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class ClubController {
     private ClubService clubService;
+    private UserService userService;
 
-    public ClubController(ClubService clubService) {
+    public ClubController(ClubService clubService, UserService userService) {
         this.clubService = clubService;
+        this.userService = userService;
     }
+
 
     @GetMapping("/clubs")
     public String listClubs(Model model){
+        UserEntity user = new UserEntity();
         List<ClubDto> clubs = clubService.findAllClubs();
+        String username = SecurityUtil.getSessionUser();
+        if(username!= null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("clubs", clubs);
         return "clubs-list";
     }
 
+
+
     @GetMapping("/clubs/{clubId}")
     public String clubDetail(@PathVariable("clubId") long clubId, Model model){
+        UserEntity user = new UserEntity();
         ClubDto clubDto = clubService.findClubById(clubId);
+        String username = SecurityUtil.getSessionUser();
+        if(username!= null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("club", clubDto);
         return "clubs-detail";
     }
+
 
     @GetMapping("/clubs/new")
     public String createClubForm(Model model){
@@ -39,6 +64,8 @@ public class ClubController {
         model.addAttribute("club", club);
         return "clubs-create";
     }
+
+
 
     @GetMapping("/clubs/{clubId}/delete")
     public String deleteClub(@PathVariable("clubId") Long clubId){

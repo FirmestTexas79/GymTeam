@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Club List</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+    <!-- Obsah stránky -->
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5 text-center"> <!-- Přidána třída text-center -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">GymBros jsou blízko</h1>
+                <p class="lead fw-normal text-muted mb-0">GymBros v tvé blízkosti</p>
+            </div>
+            <div class="row gx-0 align-items-center shadow"> <!-- Přidána třída row-cols-auto pro zmenšení šířky řádku -->
+                <div class="col-12"> <!-- Přidána třída col-6 pro zmenšení šířky sloupce -->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th></th> <!-- Přidán prázdný sloupec pro tlačítko Smazat -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="userEntity : ${userEntities}">
+                            <td th:text="${userEntity.id}"></td>
+                            <td th:text="${userEntity.username}"></td>
+                            <td th:text="${userEntity.email}"></td>
+                            <td> <!-- Sloupec pro tlačítko Smazat s JavaScriptem pro kontrolní popup okno -->
+                                <a class="btn btn-primary delete-btn" href="#" th:attr="data-url=@{/userEntity/{userId}/delete(userId=${userEntity.id})}" onclick="confirmDelete(event)">Smazat</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+        var url = event.target.getAttribute('data-url');
+        if (confirm('Opravdu chcete smazat tento záznam?')) {
+            window.location.href = url;
+        }
+    }
+</script>
+</body>
+</html>

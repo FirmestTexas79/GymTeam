@@ -24,6 +24,7 @@ public class EventDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
     private String type;
+    private String content;
     private String photoUrl;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;

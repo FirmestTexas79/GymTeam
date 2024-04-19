@@ -1,17 +1,17 @@
 package com.gymos.web.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Getter
 @Setter
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")
@@ -22,7 +22,7 @@ public class UserEntity {
     private String username;
     private String email;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},

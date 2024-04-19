@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Seznam klubů</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+    /* Definice proměnných */
+    :root {
+      --color: #54FE55;
+      --color2: #1a4f1a;
+      --glowSize: 10px;
+    }
+
+
+    *{
+      font-family: 'Press Start 2P', cursive;
+      box-sizing: border-box;
+    }
+    #app{
+      padding: 1rem;
+      color: var(--color);
+      text-shadow: 0px 0px var(--glowSize);
+      font-size: 6rem;
+    }
+    #app .txt {
+      font-size: 1.8rem;
+    }
+    @keyframes blink {
+      0%   {opacity: 0}
+      49%  {opacity: 0}
+      50%  {opacity: 1}
+      100% {opacity: 1}
+    }
+
+    .blink {
+      animation-name: blink;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column h-75">
+<main class="flex-shrink-0">
+
+  <!-- Obsah stránky -->
+  <section layout:fragment="body" style="background-color: black;">
+    <div class="container my-5 text-center"> <!-- Přidána třída text-center -->
+      <div id="app">
+        <div class="txt">
+          .................................
+        </div>
+        <div>403</div>
+        <div class="txt">
+          Forbidden<span class="blink">_</span>
+        </div>
+        <div class="txt">
+          .................................
+        </div>
+        <div class="txt">
+          Zde nemáš přístup prostý smrtelníku
+        </div>
+        <div class="txt">
+          .................................
+        </div>
+        <div class="txt">
+          Otoč se zády a odejdi od kud jsi přišel
+        </div>
+        <div class="txt">
+          .................................
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

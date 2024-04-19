@@ -2,7 +2,10 @@ package com.gymos.web.service.impl;
 
 import com.gymos.web.dto.ClubDto;
 import com.gymos.web.models.Club;
+import com.gymos.web.models.UserEntity;
 import com.gymos.web.repository.ClubRepository;
+import com.gymos.web.repository.UserRepository;
+import com.gymos.web.security.SecurityUtil;
 import com.gymos.web.service.ClubService;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +20,11 @@ import static com.gymos.web.mapper.ClubMapper.mapToClubDto;
 public class ClubServiceImpl implements ClubService {
 
     private ClubRepository clubRepository;
+    private UserRepository userRepository;
 
-    public ClubServiceImpl(ClubRepository clubRepository){
+    public ClubServiceImpl(ClubRepository clubRepository, UserRepository userRepository){
         this.clubRepository = clubRepository;
+        this.userRepository = userRepository;
     }
 
     public List<ClubDto> findAllClubs(){
@@ -29,7 +34,10 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public Club saveClub(ClubDto clubDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
+        club.setCreatedBy(user);
         return clubRepository.save(club);
     }
 
@@ -41,7 +49,10 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public void updateClub(ClubDto clubDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
+        club.setCreatedBy(user);
         clubRepository.save(club);
     }
 

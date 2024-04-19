@@ -9,7 +9,7 @@
 <main class="flex-shrink-0">
     <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
-        <div class = container>
+        <div class = "container">
             <form role="form" method="post" th:action="@{/events/{clubId}(clubId=${clubId})}" th:object="${event}">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -68,6 +68,17 @@
                             th:field="*{endTime}"
                             placeholder="Konec">
                     <p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="content">Popis</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="content"
+                            name="content"
+                            th:field="*{content}"
+                            placeholder="Popis">
+                    <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Vytvořit</button>
             </form>
