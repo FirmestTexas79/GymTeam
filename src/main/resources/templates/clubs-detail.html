@@ -26,8 +26,7 @@
                         <a href="#!"><img class="card-img-top" th:src="${club.photoUrl}" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted" th:text="${club.createdOn}"></div>
-                            <h2 class="card-title">O tomhle klubu</h2>
-                            <p class="card-text" th:text="${club.content}"></p>
+                            <h2 class="card-title">Nástroje pro majitele:</h2>
                             <div th:if="${user.id} == ${club.createdBy.id}">
                                 <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}" >Smazat</a>
                                 <a class="btn btn-primary" th:href="@{/events/{clubId}/new(clubId=${club.id})}" >Vytvořit Akci</a>
@@ -53,17 +52,6 @@
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Search</div>
-                        <div class="card-body">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Categories widget-->
                     <div class="card mb-4">
                         <div class="card-header">Categories</div>
                         <div class="card-body">
@@ -81,7 +69,7 @@
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Popis</div>
-                        <div class="card-body">Zde jsou vypsány eventy pro daný klub</div>
+                        <div class="card-body" th:text="${club.content}"></div>
                     </div>
                 </div>
             </div>

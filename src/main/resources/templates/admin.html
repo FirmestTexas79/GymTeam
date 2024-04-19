@@ -31,8 +31,8 @@
                             <td th:text="${userEntity.id}"></td>
                             <td th:text="${userEntity.username}"></td>
                             <td th:text="${userEntity.email}"></td>
-                            <td> <!-- Sloupec pro tlačítko Smazat -->
-                                <a class="btn btn-primary" th:href="@{/userEntity/{userId}/delete(userId=${userEntity.id})}">Smazat</a>
+                            <td> <!-- Sloupec pro tlačítko Smazat s JavaScriptem pro kontrolní popup okno -->
+                                <a class="btn btn-primary delete-btn" href="#" th:attr="data-url=@{/userEntity/{userId}/delete(userId=${userEntity.id})}" onclick="confirmDelete(event)">Smazat</a>
                             </td>
                         </tr>
                         </tbody>
@@ -42,5 +42,17 @@
         </div>
     </section>
 </main>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+        var url = event.target.getAttribute('data-url');
+        if (confirm('Opravdu chcete smazat tento záznam?')) {
+            window.location.href = url;
+        }
+    }
+</script>
 </body>
 </html>

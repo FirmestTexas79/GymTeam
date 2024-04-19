@@ -36,8 +36,18 @@ public class AuthController {
 
             return "admin"; // Pokud uživatel má roli ADMIN, může přistoupit na stránku /admin
         } else {
-            return "redirect:/index"; // Pokud uživatel nemá roli ADMIN, přesměrujeme ho na jinou stránku
+            return "redirect:/admin-kontrola"; // Pokud uživatel nemá roli ADMIN, přesměrujeme ho na jinou stránku
         }
+    }
+
+    @GetMapping("/admin-kontrola")
+    public String adminKontrola() {
+        return "admin-kontrola"; // Vrátí název šablony HTML pro domovskou stránku
+    }
+
+    @GetMapping("/info")
+    public String info() {
+        return "info"; // Vrátí název šablony HTML pro domovskou stránku
     }
 
 

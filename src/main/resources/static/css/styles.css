@@ -631,6 +631,10 @@ progress {
   margin-left: 30vw;
 }
 
+.container-trans{
+  background: transparent;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
@@ -5237,6 +5241,14 @@ textarea.form-control-lg {
   padding: var(--bs-toast-padding-x);
   word-wrap: break-word;
 }
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Upravte výšku podle vašich potřeb */
+}
+
 
 .modal {
   --bs-modal-zindex: 1055;
