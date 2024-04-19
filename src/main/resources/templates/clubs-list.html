@@ -1,70 +1,33 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html
+        xmlns:th="https://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
 <head>
     <title>Club List</title>
-    <style>
-        /* Styl pro maximální velikost obrázků */
-        .img-container {
-            position: relative;
-            text-align: center;
-        }
-
-        .img-container img {
-            max-width: 400px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .img-container .club-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.8); /* Průhledné pozadí pro text */
-            padding: 15px;
-        }
-
-        .button-container {
-            text-align: center;
-            margin-top: 1px; /* Oddělení tlačítek od textu */
-        }
-
-        .button-container .btn {
-            margin-right: 10px; /* Mezera mezi tlačítky */
-        }
-    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-    <!-- Obsah stránky -->
+    <!-- Page Content-->
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">GymBros jsou blízko</h1>
                 <p class="lead fw-normal text-muted mb-0">GymBros v tvé blízkosti</p>
             </div>
-            <div class="row gx-5 align-items-center shadow">
+            <div class="row gx-5">
                 <div>
                     <form th:action="@{clubs/search}" class="form-inline my-2 my-lg-0 mb-3">
                         <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Hledej kluby" aria-label="Search">
                     </form>
                 </div>
-                <div th:each="club :${clubs}" class="col-lg-6 mb-2 d-flex flex-column align-items-center">
-                    <div class="img-container mb-3">
+                <div th:each="club :${clubs}" class="col-lg-6 mb-2">
+                    <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..." />
-                        <div class="club-title">
-                            <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Název klubu</a>
-                        </div>
+                        <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
-                    <div class="button-container d-flex">
-                        <a class="btn btn-primary me-2" th:href="@{/clubs/{clubId}(clubId=${club.id})}">Zobrazit</a>
-                        <div th:if="${user.id} == ${club.createdBy.id}">
-                            <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Upravit</a>
-                        </div>
-                    </div>
+                    <a class="btn btn-primary" th:href="@{/clubs/{clubId}(clubId=${club.id})}">Zobrazit</a>
+                    <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Upravit</a>
                 </div>
             </div>
         </div>
