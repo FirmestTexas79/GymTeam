@@ -36,6 +36,7 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/index}" >Home</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/clubs}">Najít Klub</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/events}">Najít Událost</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/comments}">Fórum</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Přihlásit</a></li>
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/register}">Registrovat</a></li>
