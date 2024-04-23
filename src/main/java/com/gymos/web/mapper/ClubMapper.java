@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import static com.gymos.web.mapper.EventMapper.mapToEventDto;
 
 public class ClubMapper {
+
+    //Mapování mezi datovými modely a dto
+    //Oddělení mezi datovou a prezentovanou vrstvou
     public static Club mapToClub(ClubDto club) {
         Club clubDto = Club.builder()
                 .id(club.getId())

@@ -45,15 +45,25 @@ public class ClubController {
 
     @GetMapping("/clubs/{clubId}")
     public String clubDetail(@PathVariable("clubId") long clubId, Model model){
+        // Metoda detailKlubu() zpracovává GET požadavky na detail konkrétního klubu.
+        // Parametr klubId je získán z URL cesty a používá se k identifikaci klubu.
         UserEntity user = new UserEntity();
+        // Vytvoření nové instance UserEntity pro případ, že uživatel není přihlášen.
         ClubDto clubDto = clubService.findClubById(clubId);
+        // Získání detailů klubu pomocí služby klubService na základě poskytnutého klubId.
         String username = SecurityUtil.getSessionUser();
+        // Získání uživatelského jména aktuálně přihlášeného uživatele.
         if(username!= null){
+            // Pokud je uživatel přihlášen, načtou se jeho informace z databáze.
             user = userService.findByUsername(username);
+            // Načtení uživatelských dat pomocí uživatelského jména.
             model.addAttribute("user", user);
+            // Přidání uživatelských dat do modelu pro předání do šablonového souboru.
         }
         model.addAttribute("user", user);
+        // Přidání uživatelských dat do modelu pro předání do šablonového souboru.
         model.addAttribute("club", clubDto);
+        // Přidání detailů klubu do modelu pro předání do šablonového souboru.
         return "clubs-detail";
     }
 

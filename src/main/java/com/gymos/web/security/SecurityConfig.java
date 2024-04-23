@@ -40,19 +40,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.csrf().disable()
-                .authorizeRequests()
+        http.csrf().disable()// Zakázání CSRF ochrany
+                .authorizeRequests()// Nastavení autorizace požadavků
                     .requestMatchers("/login", "/register", "/clubs","/index", "/css/", "/js/")
-                    .permitAll()
+                    .permitAll()// Povolení přístupu bez autentizace
                 .and()
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/index")
-                        .loginProcessingUrl("/login")
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                ).logout(
+                .formLogin(form -> form// Nastavení formulářového přihlášení
+                        .loginPage("/login")// Specifikace stránky s přihlašovacím formulářem
+                        .defaultSuccessUrl("/index")// Přesměrování po úspěšném přihlášení
+                        .loginProcessingUrl("/login")// URL pro zpracování přihlašovacího formuláře
+                        .failureUrl("/login?error=true")// URL pro přesměrování při neúspěšném přihlášení
+                        .permitAll()// Povolení přístupu bez autentizace
+                ).logout(// Konfigurace odhlášení
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 );
@@ -60,6 +60,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Metoda pro konfiguraci správce autentizace
     public void configure(AuthenticationManagerBuilder builder) throws Exception{
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }

@@ -5,6 +5,8 @@ import com.gymos.web.dto.EventDto;
 import java.util.List;
 
 public interface EventService {
+    //Logika a provádění operace s daty
+
     void createEvent(Long clubId, EventDto eventDto);
     List<EventDto> findAllEvents();
 

@@ -7,6 +7,8 @@ import com.gymos.web.models.UserEntity;
 import java.util.List;
 
 public interface UserService {
+    //Logika a provádění operace s daty
+
     void saveUser(RegistrationDto registrationDto);
 
     UserEntity findByEmail(String email);

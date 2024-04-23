@@ -6,6 +6,7 @@ import com.gymos.web.models.Comment;
 import java.util.List;
 
 public interface CommentService {
+    //Logika a provádění operace s daty
 
     List<CommentDto> findAllComments();
 

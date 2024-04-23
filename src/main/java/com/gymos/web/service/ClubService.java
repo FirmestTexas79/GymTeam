@@ -6,6 +6,8 @@ import com.gymos.web.models.Club;
 import java.util.List;
 
 public interface ClubService {
+    //Logika a provádění operace s daty
+
     List<ClubDto> findAllClubs();
     Club saveClub(ClubDto clubDto);
     ClubDto findClubById(long clubId);

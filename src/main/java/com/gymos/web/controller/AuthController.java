@@ -42,12 +42,12 @@ public class AuthController {
 
     @GetMapping("/admin-kontrola")
     public String adminKontrola() {
-        return "admin-kontrola"; // Vrátí název šablony HTML pro domovskou stránku
+        return "admin-kontrola"; // Vrátí název šablony HTML
     }
 
     @GetMapping("/info")
     public String info() {
-        return "info"; // Vrátí název šablony HTML pro domovskou stránku
+        return "info"; // Vrátí název šablony HTML
     }
 
 
@@ -75,15 +75,19 @@ public class AuthController {
     @PostMapping("/register/save")
     public String register(@Valid @ModelAttribute("user") RegistrationDto user,
                            BindingResult result, Model model){
+        // Kontrola existence uživatele podle e-mailu
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
         if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
             return "redirect:/register?fail";
         }
+        // Kontrola existence uživatele podle uživatelského jména
         UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
         if(existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
+            // Pokud uživatel se zadaným uživatelským jménem již existuje, přesměruj na stránku s neúspěchem
             return "redirect:/register?fail";
         }
         if(result.hasErrors()){
+            // Pokud došlo k chybám při validaci, přidej objekt zpět do modelu a zobraz stránku pro registraci
             model.addAttribute("user", user);
             return "register";
         }

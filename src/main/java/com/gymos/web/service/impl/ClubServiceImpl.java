@@ -19,6 +19,7 @@ import static com.gymos.web.mapper.ClubMapper.mapToClubDto;
 @Service
 public class ClubServiceImpl implements ClubService {
 
+    //Konkrétní implementace toho z Service
     private ClubRepository clubRepository;
     private UserRepository userRepository;
 

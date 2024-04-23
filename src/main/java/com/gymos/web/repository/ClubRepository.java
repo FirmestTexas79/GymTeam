@@ -12,4 +12,6 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 
     @Query("SELECT c from Club c WHERE c.title LIKE CONCAT('%', :query, '%')")
     List<Club> searchClubs(String query);
+
+// Rozhraní pro komunikaci s databází
 }
